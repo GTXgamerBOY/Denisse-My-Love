@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Love</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Playfair+Display:wght@500&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #fce0e6, #fcd4e0);
+            color: #555;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: #e64594;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        p {
+            color: #555;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.8); /* Slightly transparent white */
+            padding: 25px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .btn {
+            background: linear-gradient(to right, #ff8a9e, #fca3b1);
+            color: white;
+            padding: 12px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 30px;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background: linear-gradient(to right, #ff6f8a, #fc8f9f);
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .input-area {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        input[type="password"] {
+            padding: 12px 18px;
+            border-radius: 25px;
+            border: 2px solid #FFB6C1;
+            margin-right: 10px;
+            font-size: 1.1em;
+            width: 300px;
+            outline: none;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .password-input:focus {
+            border-color: #FF69B4;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .password-submit {
+            background: linear-gradient(to right, #FF8A9E, #FCA3B1);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 12px 25px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .password-submit:hover {
+            background: linear-gradient(to right, #FF6F8A, #FC8F9F);
+            transform: scale(1.05);
+        }
+
+        .credits {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #444;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .self-map-container {
+            display: none;
+            text-align: center;
+        }
+
+        .self-map-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .self-map-button {
+            background: linear-gradient(to right, #ff8a9e, #fca3b1);
+            color: white;
+            padding: 12px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 30px;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .self-map-button:hover {
+            background: linear-gradient(to right, #ff6f8a, #fc8f9f);
+            transform: scale(1.05);
+        }
+
+        .section {
+            display: none;
+            background: rgba(255, 235, 240, 0.5); /* Light pink background */
+            border-radius: 10px;
+            border: 1px solid #ffdde7; /* Light pink border */
+            box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1); /* Inset shadow */
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin: 10px 0; /* More spacing */
+            padding: 12px;
+            background-color: rgba(255, 204, 229, 0.3); /* Lighter pink for list items */
+            border-radius: 8px;
+            border: 1px solid #ffb6c1; /* Pink border for list items */
+            color: #555;
+        }
+
+        .dropdown { /* Dropdown container */
+            position: relative;
+            display: inline-block;
+            margin-top: 20px; /* Spacing */
+        }
+
+        .dropdown-button { /* Dropdown button style */
+            background: linear-gradient(to right, #a8b6ff, #c3d9ff);
+            color: white;
+            padding: 12px 30px;
+            font-size: 1em;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            text-decoration: none; /* Remove underline if used as a link */
+        }
+
+        .dropdown-button:hover {
+            background: linear-gradient(to right, #8fa3ff, #aec6ff);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-content { /* Dropdown content (hidden by default) */
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            border-radius: 10px;
+        }
+
+        .dropdown-content a { /* Style for links inside the dropdown */
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover { /* Hover effect for links */
+            background-color: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .show { /* Class to show the dropdown */
+            display: block;
+        }
+
+        /* Media Queries for Mobile Responsiveness */
+        @media screen and (max-width: 600px) {
+            h1 {
+                font-size: 2em; /* Smaller heading on mobile */
+            }
+
+            p {
+                font-size: 0.9em; /* Smaller paragraph text */
+            }
+
+            .button,
+            .btn,
+            .self-map-button,
+            .password-submit,
+            .dropdown-button {
+                padding: 10px 20px; /* Smaller button padding */
+                font-size: 0.9em; /* Smaller button font */
+            }
+
+            .input-area input {
+                width: 90%; /* Adjust input width */
+            }
+
+            .section-content {
+                padding: 15px; /* Smaller section padding */
+            }
+
+            .dropdown-content {
+                min-width: 150px; /* Adjust dropdown width */
+            }
+        }
+
+    </style>
+    <script>
+        function revealPassword() {
+            document.getElementById('introCard').style.display = 'none';
+            document.getElementById('passwordSection').style.display = 'flex';
+        }
+
+        function checkPassword() {
+            const pw = document.getElementById('pwInput').value;
+            if (pw === "09082009") {
+                document.getElementById('passwordSection').style.display = 'none';
+                document.getElementById('selfMap').style.display = 'block';
+                document.getElementById('creditText').style.display = 'block';
+                showSection(null); // Hide all sections initially
+            } else {
+                alert('Wrong password, try again love!');
+            }
+        }
+
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const isVisible = section.style.display === 'block';
+
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(s => s.style.display = 'none'); // Hide all
+
+            if (!isVisible) {
+                section.style.display = 'block'; // Show if hidden
+            }
+        }
+
+        function toggleDropdown() {
+            document.getElementById("myDropdown").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-button')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+
+        window.onload = function() {
+            toggleSection(null); // Hide all sections on page load
+        };
+    </script>
+</head>
+
+<body>
+
+<div class="card" id="introCard">
+    <h1>Hi Love</h1>
+    <p>This is a little something I made just for you. I poured all my affection and creativity into this, just like I do when I’m thinking of you every day. Click "Enter" when you're ready.</p>
+    <button class="btn" onclick="revealPassword()">Enter</button>
+</div>
+
+<div class="card input-area" id="passwordSection" style="display:none;">
+    <input type="password" id="pwInput" placeholder="Enter the secret code">
+    <button class="btn" onclick="checkPassword()">Unlock</button>
+</div>
+
+<div class="card" id="selfMap" style="display: none;">
+    <h1>Denisse Nicolai Chiquito</h1>
+    <p>Interactive Self Map</p>
+
+    <div class="self-map-buttons">
+        <button class="self-map-button" onclick="toggleSection('nicknames')">Nicknames</button>
+        <button class="self-map-button" onclick="toggleSection('birthday')">Birthday</button>
+        <button class="self-map-button" onclick="toggleSection('what-i-see-in-you')">What I See in You</button>
+        <button class="self-map-button" onclick="toggleSection('favorite-foods')">Favorite Foods</button>
+        <button class="self-map-button" onclick="toggleSection('how-i-see-you')">How I See You as a Person</button>
+    </div>
+
+    <div class="section" id="nicknames">
+        <h2>Nicknames</h2>
+        <ul>
+            <li>Denisse</li>
+            <li>Baby</li>
+            <li>Denz</li>
+            <li>Baks</li>
+            <li>Love</li>
+        </ul>
+    </div>
+
+    <div class="section" id="birthday">
+        <h2>Birthday</h2>
+        <ul>
+            <li>June 30, 2009</li>
+        </ul>
+    </div>
+
+    <div class="section" id="what-i-see-in-you">
+        <h2>What I See in You</h2>
+        <ul>
+            <li>Cute</li>
+            <li>Maganda</li>
+            <li>Matalino</li>
+            <li>Mabait</li>
+            <li>Craves food all the time</li>
+            <li>Malambing sobra</li>
+        </ul>
+    </div>
+
+    <div class="section" id="favorite-foods">
+        <h2>Favorite Foods</h2>
+        <ul>
+            <li>Ice Cream</li>
+            <li>Shawarma Rice</li>
+            <li>KFC Chicken & Fries</li>
+            <li>Sushi</li>
+            <li>Twister Wraps</li>
+        </ul>
+    </div>
+
+    <div class="section" id="how-i-see-you">
+        <h2>How I See You as a Person</h2>
+        <p>You’re not just someone I admire — you’re someone I deeply respect. You feel deeply, you care fully, and you never back down kahit puyat. You’re gentle, yet strong. Soft, yet capable. And that makes you incredible.</p>
+    </div>
+
+    <div class="dropdown">
+        <button onclick="toggleDropdown()" class="dropdown-button">My Other Websites</button>
+        <div id="myDropdown" class="dropdown-content">
+            <a href="https://gtxgamerboy.github.io/DigitalPhotoBooth/">Photo Booth</a>
+            <a href="https://gtxgamerboy.github.io/Jhon-Marc-C.-Bautista/">Introduction of  Baby Mako💗</a>
+            <a href="https://gtxgamerboy.github.io/Jhon-Marc-C.-Bautista/">Interactive Selfmap JM (Mako)</a>
+        </div>
+    </div>
+</div>
+
+<div class="credit" id="creditText" style="display:none;">Made with love by JM (Mako) for my one and only, Denisse</div>
+
+</body>
+
+</html>
